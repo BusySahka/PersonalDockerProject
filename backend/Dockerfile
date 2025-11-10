@@ -16,4 +16,6 @@ RUN uv pip install --system --no-cache .
 
 COPY /app /app
 
-CMD ["uv", "run", "-m", "main", "100"]
+EXPOSE 20001
+
+CMD ["uv", "run", "-m", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "20001"]
