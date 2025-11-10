@@ -1,11 +1,11 @@
 from fastapi import FastAPI
 
 from apps.users.routes import users_router
+from settings import settings
 
-app = FastAPI()
 
 def get_application() -> FastAPI:
-    app = FastAPI()
+    app = FastAPI(debug=settings.DEBUG)
 
     app.include_router(users_router, prefix='/users', tags=['Users', "Auth"])
 
