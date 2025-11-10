@@ -11,6 +11,8 @@ services:
     restart: always
     volumes:
       - ./backend/app:/app
+    env_file:
+      - .env
     command: |
       sh -c "
       uv run -m uvicorn main:app --host "0.0.0.0" --port 20001 --reload
