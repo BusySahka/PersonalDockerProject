@@ -25,7 +25,14 @@ class JWTSettings(BaseSettings):
     REFRESH_TOKEN_LIFETIME_MINUTES: int = 60
 
 
-class Settings(DatabaseSettings, JWTSettings):
+class RedisSettings(BaseSettings):
+    REDIS_HOST: str = 'redis-15815.c311.eu-central-1-1.ec2.cloud.redislabs.com'
+    REDIS_PORT: int = 15815
+    REDIS_USERNAME: str = "default"
+    REDIS_PASSWORD: str = "97qDpJq1rbHn4x4n4EpKlHqfPlraRPzv"
+
+
+class Settings(DatabaseSettings, JWTSettings, RedisSettings):
     DEBUG: bool = False
 
 
