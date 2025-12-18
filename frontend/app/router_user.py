@@ -56,3 +56,18 @@ async def user_register(request: Request, email: str = Form(''), username: str =
 
     response = RedirectResponse(request.url_for('index'), status_code=status.HTTP_303_SEE_OTHER)
     return response
+
+
+@router_user.get("/login")
+@router_user.post("/login")
+async def user_login(request: Request, email: str = Form(''), password: str = Form('')):
+    context = {
+        "request": request,
+        "title": "Login",
+        "user": {},
+        "email": email,
+        "error": ""
+    }
+    if request.method == "GET":
+        response = templates.TemplateResponse('pages/login.html', context=context)
+        return response
