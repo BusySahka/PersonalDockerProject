@@ -105,6 +105,15 @@ async def user_login(request: Request, email: str = Form(''), password: str = Fo
             'password': password
         }
         response = await client.post("http://backend:20001/users/login", data=data, headers=headers)
+        if response.status_code == 500:
+            context['error'] = 'Сервіс авторизації тимчасово недоступний'
+            response = templates.TemplateResponse('pages/login.html', context=context)
+            return response
+        if response.status_code in (400, 404):
+            context['error'] = response.json()['detail']
+            response = templates.TemplateResponse('pages/login.html', context=context)
+            return response
+
         tokens = response.json()
 
         access_token = tokens['access_token']
