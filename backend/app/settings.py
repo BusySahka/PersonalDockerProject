@@ -26,10 +26,10 @@ class JWTSettings(BaseSettings):
 
 
 class RedisSettings(BaseSettings):
-    REDIS_HOST: str = 'redis-15815.c311.eu-central-1-1.ec2.cloud.redislabs.com'
-    REDIS_PORT: int = 15815
+    REDIS_HOST: str = 'redis-16574.c293.eu-central-1-1.ec2.cloud.redislabs.com'
+    REDIS_PORT: int = 16574
     REDIS_USERNAME: str = "default"
-    REDIS_PASSWORD: str = "97qDpJq1rbHn4x4n4EpKlHqfPlraRPzv"
+    REDIS_PASSWORD: str = "t3Rfz27kOzgF9y4V84lA1ygqGGtKDq4q"
 
 
 class Settings(DatabaseSettings, JWTSettings, RedisSettings):
