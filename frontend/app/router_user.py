@@ -28,11 +28,26 @@ async def get_user(request: Request) -> dict:
 
 
 @router_user.get("/")
-async def index(request: Request, user: dict = Depends(get_user)):
+async def index(request: Request, q: str = '', user: dict = Depends(get_user)):
+
+    async with httpx.AsyncClient() as client:
+        headers = {
+            "Content-Type": "application/json",
+        }
+        params = {
+            'q': q
+        }
+
+        response = await client.get("http://backend:20001/products/", headers=headers, params=params)
+        products = response.json()
+
+
+
     context = {
         "request": request,
         "title": "Головна сторінка сайту",
-        "user": user
+        "user": user,
+        "products": products
     }
 
     response = templates.TemplateResponse('pages/index.html', context=context)
